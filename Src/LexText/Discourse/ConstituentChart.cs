@@ -580,7 +580,7 @@ namespace SIL.FieldWorks.Discourse
 		/// <summary>
 		/// Set the root object.
 		/// </summary>
-		public void SetRoot(int hvo)
+		public override void SetRoot(int hvo)
 		{
 			int oldTemplateHvo = 0;
 			if (m_template != null)
@@ -1245,7 +1245,8 @@ namespace SIL.FieldWorks.Discourse
 			InterlinLineChoices lineChoices = GetLineChoices();
 			m_body.Init(mediator, propertyTable, m_configurationParameters);
 			m_body.LineChoices = lineChoices;
-			m_ribbon.LineChoices = lineChoices;
+			m_ribbon.Init(mediator, propertyTable, m_configurationParameters);
+			m_ribbon.RibbonLineChoices = lineChoices;
 		}
 
 		/// <summary>
@@ -1307,8 +1308,10 @@ namespace SIL.FieldWorks.Discourse
 			{
 				lineChoices = InterlinLineChoices.Restore(persist, m_cache.ServiceLocator.GetInstance<ILgWritingSystemFactory>(), m_cache.LangProject, m_cache.DefaultVernWs, m_cache.DefaultAnalWs);
 			}
-			GetLineChoice(result, lineChoices, InterlinLineChoices.kflidWord);
-			GetLineChoice(result, lineChoices, InterlinLineChoices.kflidWordGloss);
+			GetLineChoice(result, lineChoices,
+				InterlinLineChoices.kflidWord,
+				InterlinLineChoices.kflidWordGloss,
+				InterlinLineChoices.kflidLexGloss);
 			return result;
 		}
 
@@ -1319,19 +1322,23 @@ namespace SIL.FieldWorks.Discourse
 		/// <param name="dest"></param>
 		/// <param name="source"></param>
 		/// <param name="flid"></param>
-		private static void GetLineChoice(InterlinLineChoices dest, InterlinLineChoices source, int flid)
+		private static void GetLineChoice(InterlinLineChoices dest, InterlinLineChoices source, params int[] flids)
 		{
-			if (source != null)
+			foreach (int flid in flids)
 			{
-				var index = source.IndexOf(flid);
-				if (index >= 0)
+				if (source != null)
 				{
-					dest.Add(source[index]);
-					return;
+					var index = source.IndexOf(flid);
+					if (index >= 0)
+					{
+						dest.Add(source[index]);
+						return;
+					}
 				}
+
+				// Last resort.
+				dest.Add(flid);
 			}
-			// Last resort.
-			dest.Add(flid);
 		}
 
 		#endregion

@@ -87,7 +87,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <OutputPath>..\..\..\Output\Debug\</OutputPath>
     <BaseAddress>285212672</BaseAddress>
@@ -135,6 +135,9 @@
     <Reference Include="Aga.Controls">
       <HintPath>..\..\..\DistFiles\Aga.Controls.dll</HintPath>
     </Reference>
+    <Reference Include="DiscourseStrings.Designer.cs">
+      <HintPath>..\Discourse\obj\x64\Debug\TempPE\DiscourseStrings.Designer.cs.dll</HintPath>
+    </Reference>
     <Reference Include="ManagedLgIcuCollator, Version=9.0.0.29078, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Output\Debug\ManagedLgIcuCollator.dll</HintPath>
@@ -143,6 +146,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\SIL.Windows.Forms.Keyboarding.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
     <Reference Include="ViewsInterfaces, Version=6.9.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\Output\Debug\ViewsInterfaces.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -409,6 +413,7 @@
     <Compile Include="FocusBoxController.Designer.cs">
       <DependentUpon>FocusBoxController.cs</DependentUpon>
     </Compile>
+    <Compile Include="IInterlinConfigurable.cs" />
     <Compile Include="ImageHolder.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -473,7 +478,7 @@
     <Compile Include="InterlinTaggingChild.Designer.cs">
       <DependentUpon>InterlinTaggingChild.cs</DependentUpon>
     </Compile>
-	<Compile Include="InterlinTaggingVc.cs" />
+    <Compile Include="InterlinTaggingVc.cs" />
     <Compile Include="InterlinVc.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -681,5 +686,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram4.cd" />
   </ItemGroup>
 </Project>
