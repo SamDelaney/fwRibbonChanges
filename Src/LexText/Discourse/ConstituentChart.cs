@@ -1311,7 +1311,7 @@ namespace SIL.FieldWorks.Discourse
 			GetLineChoice(result, lineChoices,
 				InterlinLineChoices.kflidWord,
 				InterlinLineChoices.kflidWordGloss,
-				InterlinLineChoices.kflidLexGloss);
+				InterlinLineChoices.kflidMorphemes);
 			return result;
 		}
 
